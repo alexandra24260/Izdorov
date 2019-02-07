@@ -1,0 +1,6 @@
+url.for.update.list:
+    path: '/admin/medicine'
+    defaults:
+      _controller: Drupal\getMedicine\Controller\getMedicineController::getMedicine
+    requirements:
+      _permission: 'administer permissions'
