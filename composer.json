@@ -1,0 +1,9 @@
+"repositories": [
+    {
+        "type": "vcs",
+        "url": "https://github.com/alexandra24260/Izdorov.git"
+    }
+],
+"require": {
+        "Izdorov/getMedicine": "master"
+    }
