@@ -15,14 +15,23 @@
 
 	class getMedicineController extends ControllerBase {
 
+		public function getMedicine() {
+
+			$listOfMedicine = $this->prepeareMedicine();
+			$this->saveMedicineFile($listOfMedicine);
+			$response = new Response();
+			return $response;
+
+		}
+
 		/**
 		 * Gets all list of medicine from
 		 * https://apteka.103.by/lekarstva-minsk/.
 		 *
 		 * @return array
 		 */
-		public function getMedicine() {
 
+		private function prepeareMedicine(){
 			$client   = \Drupal::httpClient();
 			$request  = $client->get( 'https://apteka.103.by/lekarstva-minsk/' );
 			$response = $request->getBody()->getContents();
@@ -38,16 +47,14 @@
 			foreach ( $tags as $tag ) {
 				$listOfMedicine[] = $tag->nodeValue;
 			}
-			$this->saveMedicineFile( $listOfMedicine );
-			$response = new Response();
-
-			return $response;
+			return $listOfMedicine;
 		}
 
 		/**
 		 * Save in csv file all list of Medicine .
 		 */
-		public function saveMedicineFile( $listOfMedicine ) {
+		private function saveMedicineFile( $listOfMedicine ) {
+
 			$spreadsheet = new Spreadsheet();
 			$spreadsheet->getActiveSheet()
 			            ->fromArray( $listOfMedicine, NULL, 'A1' );
@@ -58,11 +65,11 @@
 			$writer->setSheetIndex( 0 );
 			$filePath = '' . rand( 0, getrandmax() ) . rand( 0,
 					getrandmax() ) . ".csv";
-			$writer->save( $filePath );
-			if ( $writer != NULL ) {
+			try {
+				$writer->save( $filePath );
 				echo "Last update from https://apteka.103.by/lekarstva-minsk/ save in  web/$filePath   ";
-			} else {
-				echo "Error ....";
+			} catch (Exception $e) {
+				echo 'Error .... ',  $e->getMessage(), "\n";
 			}
 			return $filePath;
 
