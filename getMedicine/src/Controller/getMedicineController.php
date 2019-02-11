@@ -41,12 +41,7 @@
 			$xpath = new \DOMXPath( $dom );
 			$query = '//ul[@class="list"]/li';
 			$tags = $xpath->query( $query);
-			$listOfMedicine = [];
-			foreach ( $tags as $tag ) {
-				$listOfMedicine[] = array(
-					'0' => trim($tag->nodeValue),
-					'1' => md5($tag->nodeValue));
-			}
+			$listOfMedicine = $this ->addHashMedicine($tags);
 			return $listOfMedicine;
 		}
 
@@ -73,5 +68,17 @@
 			}
 			return $filePath;
 
+		}
+		/**
+		 * Add hash with md5 to list of Medicine .
+		 */
+		private function addHashMedicine($tags) {
+			$listOfMedicine = [];
+			foreach ($tags as $tag ) {
+				$listOfMedicine[] = array(
+					'0' => trim($tag->nodeValue),
+					'1' => md5($tag->nodeValue));
+			}
+			return $listOfMedicine;
 		}
 	}
