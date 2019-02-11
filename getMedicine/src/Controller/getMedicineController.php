@@ -38,14 +38,14 @@
 			libxml_use_internal_errors( TRUE );
 			$dom = new \DOMDocument();
 			$dom->loadHTML( $response );
-			$xpath          = new \DOMXPath( $dom );
-			$ul             = $dom->getElementsByTagName( 'ul[@class="list"]' )
-			                      ->item( 0 );
-			$query          = '//ul[@class="list"]/li';
-			$tags           = $xpath->query( $query, $ul );
+			$xpath = new \DOMXPath( $dom );
+			$query = '//ul[@class="list"]/li';
+			$tags = $xpath->query( $query);
 			$listOfMedicine = [];
 			foreach ( $tags as $tag ) {
-				$listOfMedicine[] = $tag->nodeValue;
+				$listOfMedicine[] = array(
+					'0' => trim($tag->nodeValue),
+					'1' => md5($tag->nodeValue));
 			}
 			return $listOfMedicine;
 		}
