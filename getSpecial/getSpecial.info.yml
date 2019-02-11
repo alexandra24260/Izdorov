@@ -1,0 +1,5 @@
+name: getSpecial
+type: module
+description: "Getting list of Doctors Specialisation from https://doktora.by/vrachi-belarusi-po-specialnosti"
+package: Izdorov
+core: 8.x
