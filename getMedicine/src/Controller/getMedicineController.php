@@ -58,7 +58,7 @@
 			$writer->setEnclosure( '' );
 			$writer->setLineEnding( "\r\n" );
 			$writer->setSheetIndex( 0 );
-			$filePath = '' . rand( 0, getrandmax() ) . rand( 0,
+			$filePath = date("m.d.y") .  "_listOfMedicine" . rand( 0,
 					getrandmax() ) . ".csv";
 			try {
 				$writer->save( $filePath );
