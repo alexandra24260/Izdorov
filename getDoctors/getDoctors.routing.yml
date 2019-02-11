@@ -1,0 +1,6 @@
+url.for.update.doctors.list:
+    path: '/admin/doctors'
+    defaults:
+      _controller: Drupal\getDoctors\Controller\getDoctorsController::getDoctors
+    requirements:
+      _permission: 'administer permissions'

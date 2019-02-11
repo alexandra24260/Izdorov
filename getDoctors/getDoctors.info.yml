@@ -1,0 +1,5 @@
+name: getDoctors
+type: module
+description: "Getting list of Doctors from  https://doktora.by"
+package: Izdorov
+core: 8.x
