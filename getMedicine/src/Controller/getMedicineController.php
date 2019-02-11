@@ -38,15 +38,10 @@
 			libxml_use_internal_errors( TRUE );
 			$dom = new \DOMDocument();
 			$dom->loadHTML( $response );
-			$xpath          = new \DOMXPath( $dom );
-			$ul             = $dom->getElementsByTagName( 'ul[@class="list"]' )
-			                      ->item( 0 );
-			$query          = '//ul[@class="list"]/li';
-			$tags           = $xpath->query( $query, $ul );
-			$listOfMedicine = [];
-			foreach ( $tags as $tag ) {
-				$listOfMedicine[] = $tag->nodeValue;
-			}
+			$xpath = new \DOMXPath( $dom );
+			$query = '//ul[@class="list"]/li';
+			$tags = $xpath->query( $query);
+			$listOfMedicine = $this ->addHashMedicine($tags);
 			return $listOfMedicine;
 		}
 
@@ -63,7 +58,7 @@
 			$writer->setEnclosure( '' );
 			$writer->setLineEnding( "\r\n" );
 			$writer->setSheetIndex( 0 );
-			$filePath = '' . rand( 0, getrandmax() ) . rand( 0,
+			$filePath = date("m.d.y") .  "_listOfMedicine" . rand( 0,
 					getrandmax() ) . ".csv";
 			try {
 				$writer->save( $filePath );
@@ -73,5 +68,17 @@
 			}
 			return $filePath;
 
+		}
+		/**
+		 * Add hash with md5 to list of Medicine .
+		 */
+		private function addHashMedicine($tags) {
+			$listOfMedicine = [];
+			foreach ($tags as $tag ) {
+				$listOfMedicine[] = array(
+					'0' => trim($tag->nodeValue),
+					'1' => md5($tag->nodeValue));
+			}
+			return $listOfMedicine;
 		}
 	}
