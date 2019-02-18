@@ -1,0 +1,6 @@
+url.for.update.list:
+    path: '/admin/special'
+    defaults:
+      _controller: Drupal\getSpecial\Controller\getSpecialController::getSpecial
+    requirements:
+      _permission: 'administer permissions'
