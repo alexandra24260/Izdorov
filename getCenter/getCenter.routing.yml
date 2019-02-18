@@ -1,0 +1,6 @@
+url.for.update.center.list:
+    path: '/admin/center'
+    defaults:
+      _controller: Drupal\getCenter\Controller\getCenterController::getCenter
+    requirements:
+      _permission: 'administer permissions'

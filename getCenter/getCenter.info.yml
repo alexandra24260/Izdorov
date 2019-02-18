@@ -1,0 +1,5 @@
+name: getCenter
+type: module
+description: "Getting list of Medical Center from  https://apteka.103.by"
+package: Izdorov
+core: 8.x
