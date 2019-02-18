@@ -1,0 +1,5 @@
+name: bundleDoctorCenter
+type: module
+description: "Getting bundle Doctors - Medical Center "
+package: Izdorov
+core: 8.x

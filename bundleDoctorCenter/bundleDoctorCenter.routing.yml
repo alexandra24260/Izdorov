@@ -1,0 +1,6 @@
+url.for.update.bundleDoctorCenter.list:
+    path: '/admin/bundleDC'
+    defaults:
+      _controller: Drupal\bundleDoctorCenter\Controller\bundleDCController::bundleDC
+    requirements:
+      _permission: 'administer permissions'
